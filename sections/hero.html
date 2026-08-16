@@ -1,3 +1,37 @@
-<section class="hero" id="hero">
-  <!-- Контент блока будет разработан на отдельном этапе -->
+<section class="hero" id="hero" aria-labelledby="hero-title">
+  <video class="hero__video" aria-hidden="true" autoplay muted loop playsinline preload="metadata">
+    <source src="originals/video/video_2026-08-16_14-43-54.mp4" type="video/mp4">
+  </video>
+
+  <div class="hero__overlay" aria-hidden="true"></div>
+
+  <div class="hero__container">
+    <div class="hero__content">
+      <p class="hero__eyebrow">Подкаст о людях строительной отрасли</p>
+      <h1 class="hero__title" id="hero-title">
+        <span>Строим.</span>
+        <span>Готовим.</span>
+        <span>Разговариваем.</span>
+      </h1>
+      <p class="hero__subtitle">Гости проекта делятся историями, опытом и любимыми рецептами — от поездки на рынок до разговора за приготовлением блюда.</p>
+
+      <div class="hero__actions" aria-label="Основные действия">
+        <a class="hero__button hero__button--primary" href="#latest-episode">
+          <span>Смотреть выпуск</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        <a class="hero__button hero__button--secondary" href="#about">О проекте</a>
+      </div>
+    </div>
+
+    <div class="hero__meta" aria-hidden="true">
+      <span>Стройка. Люди. Еда.</span>
+      <span>01</span>
+    </div>
+
+    <a class="hero__scroll-cue" href="#about" aria-label="Перейти к следующему блоку">
+      <span>Листайте</span>
+      <span aria-hidden="true">↓</span>
+    </a>
+  </div>
 </section>
