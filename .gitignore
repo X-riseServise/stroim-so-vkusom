@@ -15,3 +15,15 @@ temp/
 
 # Original source videos are stored locally and not committed.
 originals/video/
+
+# Private admin configuration.
+/admin/includes/config.php
+
+# User uploads stay on the server and are not committed.
+/uploads/episodes/*
+!/uploads/episodes/.gitkeep
+/uploads/recipes/*
+!/uploads/recipes/.gitkeep
+
+# Development screenshots
+/*.png

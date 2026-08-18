@@ -1,3 +1,351 @@
-/* About
-   Стили будут разработаны на отдельном этапе.
-*/
+.about {
+  position: relative;
+  overflow: hidden;
+  color: #20211f;
+  background:
+    linear-gradient(90deg, rgba(32, 33, 31, 0.032) 1px, transparent 1px) 0 0 / 92px 92px,
+    linear-gradient(0deg, rgba(32, 33, 31, 0.026) 1px, transparent 1px) 0 0 / 92px 92px,
+    #eee7db;
+}
+
+.about::before {
+  position: absolute;
+  right: clamp(24px, 5vw, 72px);
+  bottom: clamp(36px, 6vw, 82px);
+  width: min(34vw, 420px);
+  height: 1px;
+  content: "";
+  background: rgba(32, 33, 31, 0.14);
+  pointer-events: none;
+}
+
+.about__transition {
+  height: 18px;
+  background:
+    linear-gradient(90deg, transparent 0 7%, rgba(199, 53, 47, 0.8) 7% 12%, transparent 12% 100%),
+    linear-gradient(180deg, #101110, #eee7db);
+}
+
+.about__container {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(520px, 1fr);
+  align-items: center;
+  gap: clamp(38px, 5.4vw, 72px);
+  width: min(calc(100% - clamp(32px, 7vw, 96px)), 1280px);
+  margin-inline: auto;
+  padding-block: clamp(82px, 7.5vw, 112px) clamp(88px, 8vw, 112px);
+}
+
+.about__intro {
+  min-width: 0;
+  max-width: 500px;
+  animation: about-rise 620ms ease both;
+}
+
+.about__label {
+  margin: 0 0 16px;
+  color: #b3312c;
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about__title {
+  margin: 0;
+  color: #1f201d;
+  font-size: clamp(40px, 4.4vw, 64px);
+  font-weight: 950;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+
+.about__title span {
+  display: block;
+}
+
+.about__title span:last-child {
+  color: #c7352f;
+}
+
+.about__text {
+  display: grid;
+  max-width: 500px;
+  gap: 14px;
+  margin-top: clamp(22px, 2.8vw, 30px);
+  color: rgba(32, 33, 31, 0.8);
+  font-size: clamp(16px, 1.12vw, 18px);
+  line-height: 1.58;
+}
+
+.about__text p {
+  margin: 0;
+}
+
+.about__formula {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: clamp(24px, 3vw, 32px);
+  color: #20211f;
+  font-size: clamp(19px, 1.8vw, 26px);
+  font-weight: 950;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.about__formula span:nth-child(even) {
+  color: #c7352f;
+  font-size: 0.85em;
+}
+
+.about__note {
+  max-width: 440px;
+  margin: 14px 0 0;
+  padding-left: 18px;
+  color: rgba(32, 33, 31, 0.66);
+  border-left: 2px solid #c7352f;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.about__media {
+  position: relative;
+  min-width: 0;
+  max-width: 100%;
+  min-height: clamp(420px, 36vw, 520px);
+  margin: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent),
+    #171817;
+  border: 1px solid rgba(32, 33, 31, 0.22);
+  box-shadow: 0 30px 86px rgba(32, 33, 31, 0.18);
+  animation: about-media-in 680ms ease 120ms both;
+}
+
+.about__media::before,
+.about__media::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+.about__media::before {
+  inset: 18px;
+  z-index: 2;
+  border-top: 1px solid rgba(255, 250, 240, 0.28);
+  border-left: 1px solid rgba(255, 250, 240, 0.28);
+}
+
+.about__media::after {
+  right: 24px;
+  bottom: 24px;
+  z-index: 2;
+  width: 76px;
+  height: 76px;
+  border-right: 2px solid #c7352f;
+  border-bottom: 2px solid #c7352f;
+}
+
+.about__media video {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  opacity: 0.94;
+}
+
+.about__media-caption,
+.about__media-number,
+.about__media-line {
+  position: absolute;
+  z-index: 3;
+}
+
+.about__media-caption {
+  left: 24px;
+  bottom: 24px;
+  max-width: calc(100% - 124px);
+  padding: 12px 14px 11px;
+  color: #f7f3eb;
+  background: rgba(17, 18, 17, 0.8);
+  border: 1px solid rgba(247, 243, 235, 0.18);
+  backdrop-filter: blur(6px);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.about__media-number {
+  top: 24px;
+  right: 24px;
+  color: #c7352f;
+  font-size: 34px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.about__media-line {
+  right: 72px;
+  bottom: 48px;
+  width: min(22vw, 180px);
+  height: 1px;
+  background: rgba(247, 243, 235, 0.5);
+}
+
+.about__markers {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  grid-column: 1 / -1;
+  gap: 14px clamp(20px, 4vw, 44px);
+  align-items: center;
+  margin-top: clamp(26px, 4vw, 48px);
+  padding-top: 20px;
+  border-top: 1px solid rgba(32, 33, 31, 0.2);
+  color: rgba(32, 33, 31, 0.64);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about__markers span + span::before {
+  margin-right: clamp(20px, 4vw, 44px);
+  color: #c7352f;
+  content: "/";
+}
+
+@keyframes about-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes about-media-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1024px) {
+  .about__container {
+    grid-template-columns: 1fr;
+  }
+
+  .about__intro {
+    max-width: 720px;
+  }
+
+  .about__media {
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about__container {
+    width: min(calc(100% - 40px), 1280px);
+    padding-block: 78px;
+  }
+}
+
+@media (max-width: 560px) {
+  .about__container {
+    width: min(calc(100% - 32px), 1280px);
+    gap: 34px;
+    padding-block: 62px 72px;
+  }
+
+  .about__intro {
+    display: contents;
+    animation: none;
+  }
+
+  .about__label {
+    order: 1;
+    margin: 0;
+  }
+
+  .about__title {
+    order: 2;
+    max-width: 100%;
+    font-size: clamp(30px, 8.6vw, 34px);
+    overflow-wrap: break-word;
+  }
+
+  .about__text {
+    order: 3;
+    max-width: 100%;
+    margin-top: -12px;
+    font-size: 17px;
+    overflow-wrap: break-word;
+  }
+
+  .about__formula {
+    order: 4;
+    margin-top: -6px;
+  }
+
+  .about__text p,
+  .about__note,
+  .about__formula,
+  .about__markers {
+    overflow-wrap: anywhere;
+  }
+
+  .about__note {
+    order: 6;
+    max-width: 100%;
+    margin: -12px 0 0;
+  }
+
+  .about__media {
+    order: 5;
+    min-height: 360px;
+  }
+
+  .about__media-caption {
+    right: 22px;
+    max-width: none;
+  }
+
+  .about__media-line {
+    display: none;
+  }
+
+  .about__markers {
+    display: grid;
+    order: 7;
+    gap: 12px;
+  }
+
+  .about__markers span + span::before {
+    margin-right: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about__intro,
+  .about__media {
+    animation: none;
+  }
+}

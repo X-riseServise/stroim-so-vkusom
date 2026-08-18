@@ -1,3 +1,85 @@
-<section class="episode-flow" id="episode-flow">
-  <!-- Контент блока будет разработан на отдельном этапе -->
+<section class="episode-flow" id="episode-flow" aria-labelledby="episode-flow-title">
+  <div class="episode-flow__container">
+    <div class="episode-flow__top">
+      <div class="episode-flow__header">
+        <p class="episode-flow__label">ФОРМАТ / 02</p>
+        <h2 class="episode-flow__title" id="episode-flow-title">
+          <span>От рынка —</span>
+          <span>к разговору.</span>
+        </h2>
+        <p class="episode-flow__lead">Каждый выпуск начинается с идеи блюда и превращается в живой разговор о профессии, бизнесе и жизни.</p>
+      </div>
+
+      <div class="episode-flow__scheme" aria-hidden="true">
+        <div class="episode-flow__scheme-line">
+          <span>01</span>
+          <i></i>
+          <span>02</span>
+          <i></i>
+          <span>03</span>
+          <i></i>
+          <span>04</span>
+          <b>→</b>
+        </div>
+        <p>ИДЕЯ / ПРОДУКТЫ / ОГОНЬ / РАЗГОВОР</p>
+      </div>
+    </div>
+
+    <ol class="episode-flow__route" aria-label="Как проходит выпуск">
+      <li class="episode-flow__card" data-flow-step>
+        <figure class="episode-flow__media" aria-label="Кадр из первого выпуска">
+          <img src="assets/images/episode-flow-recipe-01.jpg" alt="Алексей Космынин и Евгения Калихова смотрят в камеру перед началом готовки">
+        </figure>
+        <div class="episode-flow__content">
+          <span class="episode-flow__number">01</span>
+          <h3>Рецепт</h3>
+          <p>Гость выбирает блюдо, которое хочет приготовить, и делится своей историей и любимыми рецептами.</p>
+        </div>
+        <span class="episode-flow__arrow" aria-hidden="true">→</span>
+      </li>
+
+      <li class="episode-flow__card" data-flow-step>
+        <figure class="episode-flow__media" aria-label="Кадр из первого выпуска">
+          <video muted playsinline preload="metadata" data-video-still="120">
+            <source src="originals/video/Строим со вкусом (вып. 1).mp4" type="video/mp4">
+          </video>
+        </figure>
+        <div class="episode-flow__content">
+          <span class="episode-flow__number">02</span>
+          <h3>За продуктами</h3>
+          <p>Вместе с ведущим отправляются за свежими ингредиентами — выбирают лучшее для блюда.</p>
+        </div>
+        <span class="episode-flow__arrow" aria-hidden="true">→</span>
+      </li>
+
+      <li class="episode-flow__card" data-flow-step>
+        <figure class="episode-flow__media" aria-label="Кадр из первого выпуска">
+          <img src="assets/images/episode-flow-cooking-03.jpg" alt="Алексей Космынин готовит блюдо у гриля">
+        </figure>
+        <div class="episode-flow__content">
+          <span class="episode-flow__number">03</span>
+          <h3>Готовим</h3>
+          <p>Возвращаются в загородный дом и готовят блюдо вместе. Всё по-настоящему: огонь, запахи, вкус и атмосфера.</p>
+        </div>
+        <span class="episode-flow__arrow" aria-hidden="true">→</span>
+      </li>
+
+      <li class="episode-flow__card" data-flow-step>
+        <figure class="episode-flow__media" aria-label="Кадр из первого выпуска">
+          <img src="assets/images/episode-flow-talk-04.jpg" alt="Алексей и гость разговаривают рядом с грилем">
+        </figure>
+        <div class="episode-flow__content">
+          <span class="episode-flow__number">04</span>
+          <h3>Общаемся</h3>
+          <p>За приготовлением говорят о профессии, бизнесе, опыте и жизни. Неформально и по-настоящему.</p>
+        </div>
+        <span class="episode-flow__arrow" aria-hidden="true">→</span>
+      </li>
+    </ol>
+
+    <div class="episode-flow__finish" aria-hidden="true">
+      <span></span>
+      <p>04 / КОНЕЦ МАРШРУТА</p>
+    </div>
+  </div>
 </section>

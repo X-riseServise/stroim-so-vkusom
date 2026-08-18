@@ -23,6 +23,10 @@
   backdrop-filter: blur(18px);
 }
 
+.site-header.is-scrolled {
+  --header-height: 72px;
+}
+
 .site-header__container {
   display: flex;
   align-items: center;
@@ -30,6 +34,7 @@
   min-height: var(--header-height);
   margin-inline: auto;
   gap: clamp(24px, 4vw, 56px);
+  transition: min-height 300ms ease;
 }
 
 .site-logo {
@@ -40,6 +45,12 @@
   color: var(--header-text);
   line-height: 0.9;
   text-decoration: none;
+  transform-origin: left center;
+  transition: transform 300ms ease;
+}
+
+.site-header.is-scrolled .site-logo {
+  transform: scale(0.94);
 }
 
 .site-logo__main {
@@ -117,7 +128,14 @@
   white-space: nowrap;
   transition:
     background-color 180ms ease,
+    min-height 300ms ease,
+    padding 300ms ease,
     transform 180ms ease;
+}
+
+.site-header.is-scrolled .site-header__cta {
+  min-height: 38px;
+  padding-inline: 16px;
 }
 
 .site-header__cta:hover,
@@ -176,6 +194,12 @@
     visibility 180ms ease;
 }
 
+.site-mobile-nav__links,
+.site-mobile-nav__cta,
+.site-mobile-nav__caption {
+  display: none;
+}
+
 .site-header.is-menu-open .site-mobile-nav {
   visibility: visible;
   opacity: 1;
@@ -191,13 +215,13 @@
   text-decoration: none;
 }
 
-.site-mobile-nav__link--cta {
-  color: var(--header-accent);
-}
-
 @media (max-width: 900px) {
   .site-header {
     --header-height: 74px;
+  }
+
+  .site-header.is-scrolled {
+    --header-height: 66px;
   }
 
   .site-nav,
@@ -207,12 +231,122 @@
 
   .site-menu-toggle {
     display: block;
+    position: fixed;
+    top: calc((var(--header-height) - 44px) / 2);
+    right: clamp(16px, 4vw, 28px);
+    transition:
+      top 300ms ease,
+      background-color 180ms ease,
+      border-color 180ms ease;
+  }
+
+  body.menu-open {
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .site-header.is-menu-open {
+    --header-height: calc(74px + env(safe-area-inset-top, 0px));
+
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    background: linear-gradient(145deg, #202220 0%, #151615 68%, #111211 100%);
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .site-header.is-menu-open .site-header__container {
+    width: calc(100% - 40px);
+    min-height: var(--header-height);
+    padding-top: env(safe-area-inset-top, 0px);
+    border-bottom: 1px solid rgba(247, 243, 235, 0.18);
+  }
+
+  .site-header.is-menu-open .site-logo {
+    transform: none;
+  }
+
+  .site-header.is-menu-open .site-menu-toggle {
+    top: calc(env(safe-area-inset-top, 0px) + 13px);
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    background: rgba(247, 243, 235, 0.06);
+    border-color: rgba(247, 243, 235, 0.28);
+  }
+
+  .site-mobile-nav {
+    top: var(--header-height);
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 18px 20px max(18px, env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition:
+      opacity 240ms ease,
+      transform 240ms ease,
+      visibility 240ms ease;
+  }
+
+  .site-header.is-menu-open .site-mobile-nav {
+    pointer-events: auto;
+  }
+
+  .site-mobile-nav__links {
+    display: grid;
+    border-bottom: 1px solid rgba(247, 243, 235, 0.16);
+  }
+
+  .site-mobile-nav__link {
+    display: flex;
+    align-items: center;
+    min-height: 64px;
+    padding: 10px 2px;
+    border-top: 1px solid rgba(247, 243, 235, 0.16);
+    font-size: clamp(24px, 7vw, 30px);
+    font-weight: 650;
+    line-height: 1.15;
+  }
+
+  .site-mobile-nav__cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 0 auto;
+    min-height: 58px;
+    margin-top: 24px;
+    padding: 0 20px;
+    color: #ffffff;
+    background: var(--header-accent);
+    font-size: 17px;
+    font-weight: 750;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .site-mobile-nav__caption {
+    display: block;
+    margin: auto 0 0;
+    padding-top: 22px;
+    color: rgba(247, 243, 235, 0.44);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
   }
 }
 
 @media (max-width: 430px) {
   .site-header {
-    --header-side-gap: 28px;
+    --header-side-gap: 40px;
   }
 
   .site-logo__main {
@@ -226,6 +360,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .site-header,
+  .site-logo,
   .site-nav__link,
   .site-nav__link::after,
   .site-header__cta,

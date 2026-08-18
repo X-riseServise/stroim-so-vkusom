@@ -1,0 +1,45 @@
+<aside class="radio-player" data-radio-player hidden aria-label="Прямой эфир Радио на Стройке">
+  <audio data-radio-audio preload="none"></audio>
+
+  <div class="radio-player__panel">
+    <div class="radio-player__brand">
+      <img src="assets/images/logo/radionastroyke.svg" alt="Логотип Радио на Стройке">
+      <div>
+        <p class="radio-player__live" data-radio-live><span aria-hidden="true"></span>LIVE</p>
+        <strong>Радио на Стройке</strong>
+        <p class="radio-player__status" data-radio-status aria-live="polite">Прямой эфир</p>
+      </div>
+    </div>
+
+    <div class="radio-player__now">
+      <span>Сейчас в эфире</span>
+      <strong>Прямой эфир Радио на Стройке</strong>
+    </div>
+
+    <div class="radio-player__controls">
+      <button class="radio-player__play" type="button" data-radio-play aria-label="Включить Радио на Стройке">
+        <span data-radio-play-icon aria-hidden="true">▶</span>
+      </button>
+
+      <button class="radio-player__mute" type="button" data-radio-mute aria-label="Выключить звук">
+        <span data-radio-mute-icon aria-hidden="true">VOL</span>
+      </button>
+
+      <label class="radio-player__volume">
+        <span class="visually-hidden">Громкость радио</span>
+        <input type="range" min="0" max="1" step="0.05" value="0.75" data-radio-volume>
+      </label>
+    </div>
+
+    <button class="radio-player__retry" type="button" data-radio-retry hidden>Попробовать снова</button>
+    <button class="radio-player__collapse" type="button" data-radio-collapse aria-label="Свернуть радиоплеер" aria-expanded="true">
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <button class="radio-player__compact" type="button" data-radio-expand aria-label="Развернуть радиоплеер">
+    <span aria-hidden="true">▶</span>
+    <strong>Радио на Стройке</strong>
+    <span class="radio-player__compact-live">LIVE</span>
+  </button>
+</aside>

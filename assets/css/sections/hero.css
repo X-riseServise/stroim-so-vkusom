@@ -156,34 +156,6 @@
   background: rgba(247, 243, 235, 0.42);
 }
 
-.hero__meta span:last-child {
-  color: #c7352f;
-  font-size: 28px;
-  line-height: 1;
-}
-
-.hero__scroll-cue {
-  position: absolute;
-  bottom: clamp(24px, 4svh, 44px);
-  left: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: rgba(247, 243, 235, 0.68);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: color 180ms ease, transform 180ms ease;
-}
-
-.hero__scroll-cue:hover,
-.hero__scroll-cue:focus-visible {
-  color: #f7f3eb;
-  transform: translateY(2px);
-}
-
 @keyframes hero-content-in {
   from {
     opacity: 0;
@@ -279,7 +251,8 @@
   }
 
   .hero__subtitle {
-    font-size: 17px;
+    font-size: 16px;
+    line-height: 1.42;
     max-width: 340px;
   }
 
@@ -323,8 +296,7 @@
     animation: none;
   }
 
-  .hero__button,
-  .hero__scroll-cue {
+  .hero__button {
     transition-duration: 0.01ms;
   }
 }

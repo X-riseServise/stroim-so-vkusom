@@ -1,3 +1,26 @@
-<section class="episodes" id="episodes">
-  <!-- Контент блока будет разработан на отдельном этапе -->
+<section class="episodes" id="episodes" aria-labelledby="episodes-title">
+  <div class="episodes__container">
+    <div class="episodes__head">
+      <p class="episodes__label">ВСЕ ВЫПУСКИ / 04</p>
+      <h2 id="episodes-title">Выпуски</h2>
+    </div>
+
+    <div class="episodes__grid">
+      <article class="episodes__card episode-card">
+        <a class="episodes__image" href="#latest-episode" aria-label="Перейти к выпуску #01 с Евгенией Калиховой">
+          <img src="assets/images/latest-episode-preview.jpg" alt="Алексей Космынин и Евгения Калихова разговаривают рядом с грилем" loading="lazy">
+        </a>
+
+        <div class="episodes__card-content">
+          <p class="episodes__meta">Выпуск #01</p>
+          <h3>Евгения Калихова</h3>
+          <p class="episodes__guest">Ведущая «Радио на Стройке»</p>
+          <p class="episodes__description">В этом выпуске Алексей Космынин и Евгения Калихова готовят каре молодого ягнёнка, салат с рукколой и лангустинами и шашлык из осетра — приправляя всё это острым обсуждением главных проектов 2026 года, строительной индустрии и проектов СЛЁТ Медиа.</p>
+          <a class="episodes__more" href="#latest-episode">Подробнее →</a>
+        </div>
+      </article>
+
+      <!-- Следующие выпуски добавляются копированием карточки episode-card -->
+    </div>
+  </div>
 </section>
