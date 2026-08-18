@@ -4,27 +4,39 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Configure SSH
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup SSH
         shell: bash
         run: |
           mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          printf '%s\n' "${{ secrets.BEGET_SSH_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H "${{ secrets.BEGET_HOST }}" >> ~/.ssh/known_hosts
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
 
-      - name: Deploy website
+      - name: Deploy via rsync
         shell: bash
         run: |
-          ssh -i ~/.ssh/deploy_key "${{ secrets.BEGET_USER }}@${{ secrets.BEGET_HOST }}" "
-            set -e
-            cd '${{ secrets.BEGET_DEPLOY_PATH }}'
-            git fetch origin main
-            git reset --hard origin/main
-          "
+          rsync -az --delete \
+            --exclude=".git/" \
+            --exclude=".github/" \
+            --exclude=".gitignore" \
+            --exclude="admin/includes/config.php" \
+            --exclude="uploads/episodes/" \
+            --exclude="uploads/recipes/" \
+            --exclude="originals/" \
+            -e "ssh -i ~/.ssh/id_ed25519 -p ${{ secrets.SSH_PORT }}" \
+            ./ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}
+
+      - name: Finish
+        run: echo "Deployment completed successfully."
