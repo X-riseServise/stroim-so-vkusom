@@ -54,7 +54,6 @@ async function loadSections() {
     initPartnersReveal,
     initFooterReveal,
     initPlaceholderLinks,
-    scrollToInitialHash,
   ].forEach((initializer) => {
     try {
       initializer();
@@ -62,20 +61,6 @@ async function loadSections() {
       console.error(error);
     }
   });
-}
-
-function scrollToInitialHash() {
-  if (!window.location.hash) return;
-
-  const target = document.querySelector(window.location.hash);
-
-  if (target) {
-    requestAnimationFrame(() => {
-      window.setTimeout(() => {
-        window.scrollTo({ top: target.offsetTop });
-      }, 700);
-    });
-  }
 }
 
 function initVideoStills() {
@@ -240,6 +225,72 @@ function initHeader() {
     }
   }
 
+  function targetFromHash(hash) {
+    if (!hash || hash === "#") return null;
+
+    try {
+      return document.getElementById(decodeURIComponent(hash.slice(1)));
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function clearLocationHash() {
+    if (!window.location.hash) return;
+
+    window.history.replaceState(
+      window.history.state,
+      "",
+      `${window.location.pathname}${window.location.search}`
+    );
+  }
+
+  function scrollToTarget(target, smooth = true) {
+    const behavior = smooth && !window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "smooth" : "auto";
+    target.scrollIntoView({ behavior, block: "start" });
+  }
+
+  function handleInternalNavigation(event) {
+    const link = event.currentTarget;
+    const target = targetFromHash(link.hash);
+
+    if (!target) {
+      event.preventDefault();
+      clearLocationHash();
+      return;
+    }
+
+    event.preventDefault();
+    closeMobileMenu();
+    clearLocationHash();
+    requestAnimationFrame(() => scrollToTarget(target));
+  }
+
+  function handleInitialHash() {
+    const hash = window.location.hash;
+    if (!hash) return;
+
+    const navigationEntry = window.performance?.getEntriesByType?.("navigation")?.[0];
+
+    if (navigationEntry?.type === "reload") {
+      clearLocationHash();
+      return;
+    }
+
+    if (navigationEntry?.type === "back_forward") return;
+
+    const target = targetFromHash(hash);
+    if (!target) {
+      clearLocationHash();
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      scrollToTarget(target, false);
+      clearLocationHash();
+    });
+  }
+
   function toggleMobileMenu() {
     if (!menuToggle || !mobileNav) return;
 
@@ -267,10 +318,6 @@ function initHeader() {
   if (menuToggle && mobileNav) {
     menuToggle.addEventListener("click", toggleMobileMenu);
 
-    mobileNav.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", closeMobileMenu);
-    });
-
     window.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
         closeMobileMenu({ restoreFocus: true });
@@ -281,6 +328,12 @@ function initHeader() {
       if (window.innerWidth > 900) closeMobileMenu();
     });
   }
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", handleInternalNavigation);
+  });
+
+  handleInitialHash();
 }
 
 loadSections();

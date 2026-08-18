@@ -8,7 +8,7 @@
 
   position: fixed;
   inset: 0 0 auto;
-  z-index: 100;
+  z-index: 1000;
   color: var(--header-text);
   transition:
     background-color 220ms ease,
@@ -257,9 +257,12 @@
     background: linear-gradient(145deg, #202220 0%, #151615 68%, #111211 100%);
     box-shadow: none;
     backdrop-filter: none;
+    isolation: isolate;
   }
 
   .site-header.is-menu-open .site-header__container {
+    position: relative;
+    z-index: 2;
     width: calc(100% - 40px);
     min-height: var(--header-height);
     padding-top: env(safe-area-inset-top, 0px);
@@ -280,15 +283,22 @@
   }
 
   .site-mobile-nav {
-    top: var(--header-height);
-    bottom: 0;
+    z-index: 1;
+    inset: 0;
     display: flex;
     flex-direction: column;
     width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
     margin: 0;
-    padding: 18px 20px max(18px, env(safe-area-inset-bottom, 0px));
+    padding:
+      calc(var(--header-height) + 18px)
+      max(20px, env(safe-area-inset-right, 0px))
+      max(24px, env(safe-area-inset-bottom, 0px))
+      max(20px, env(safe-area-inset-left, 0px));
     overflow-y: auto;
     overscroll-behavior: contain;
+    background: linear-gradient(145deg, #202220 0%, #151615 68%, #111211 100%);
     pointer-events: none;
     transform: translateY(-8px);
     transition:
@@ -309,8 +319,8 @@
   .site-mobile-nav__link {
     display: flex;
     align-items: center;
-    min-height: 64px;
-    padding: 10px 2px;
+    min-height: 68px;
+    padding: 12px 2px;
     border-top: 1px solid rgba(247, 243, 235, 0.16);
     font-size: clamp(24px, 7vw, 30px);
     font-weight: 650;
@@ -323,7 +333,7 @@
     justify-content: space-between;
     flex: 0 0 auto;
     min-height: 58px;
-    margin-top: 24px;
+    margin-top: 28px;
     padding: 0 20px;
     color: #ffffff;
     background: var(--header-accent);

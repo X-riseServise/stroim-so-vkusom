@@ -37,6 +37,10 @@
     return episode?.number_label || String(episode?.number || "").padStart(2, "0");
   }
 
+  function formatHeading(value) {
+    return String(value || "").replace(/\.+\s*$/, "");
+  }
+
   function formatDate(value) {
     if (!value) return "Дата скоро";
 
@@ -86,7 +90,7 @@
     root.classList.remove("is-loading", "is-empty", "is-error");
 
     root.querySelector("[data-latest-label]").textContent = `ВЫПУСК / ${number}`;
-    root.querySelector("[data-latest-title]").textContent = `${episode.title}.`;
+    root.querySelector("[data-latest-title]").textContent = formatHeading(episode.title);
     root.querySelector("[data-latest-guest-line]").textContent = `В гостях — ${episode.guest.name}`;
     root.querySelector("[data-latest-number]").textContent = `ВЫПУСК #${number}`;
     root.querySelector("[data-latest-guest]").textContent = episode.guest.name;
@@ -112,7 +116,7 @@
     root.classList.remove("is-loading", "is-error");
     root.classList.add("is-empty");
     root.querySelector("[data-latest-label]").textContent = "ВЫПУСК / СКОРО";
-    root.querySelector("[data-latest-title]").textContent = "Первый выпуск скоро появится.";
+    root.querySelector("[data-latest-title]").textContent = "Первый выпуск скоро появится";
     root.querySelector("[data-latest-guest-line]").textContent = "Мы готовим публикацию";
     root.querySelector("[data-latest-number]").textContent = "СКОРО";
     root.querySelector("[data-latest-guest]").textContent = "Выпуск в подготовке";
@@ -131,7 +135,7 @@
 
     root.classList.remove("is-loading", "is-empty");
     root.classList.add("is-error");
-    root.querySelector("[data-latest-title]").textContent = "Последний выпуск.";
+    root.querySelector("[data-latest-title]").textContent = "Последний выпуск";
     root.querySelector("[data-latest-guest-line]").textContent = "Информация временно недоступна";
     root.querySelector("[data-latest-description]").textContent = "Не удалось загрузить информацию о выпуске.";
     root.querySelectorAll("[data-video-trigger]").forEach((trigger) => {
@@ -151,7 +155,7 @@
 
     const content = createElement("div", "episodes__card-content");
     const meta = createElement("p", "episodes__meta", `Выпуск #${number} / ${formatDate(episode.published_at)}`);
-    const title = createElement("h3", "", episode.title);
+    const title = createElement("h3", "", formatHeading(episode.title));
     const guest = createElement("p", "episodes__guest", episode.guest.name);
     const description = createElement("p", "episodes__description", episode.description);
     const link = createElement("a", "episodes__more", "Подробнее");
