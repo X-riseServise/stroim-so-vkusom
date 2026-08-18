@@ -21,6 +21,10 @@ body {
   line-height: 1.5;
 }
 
+#sections-root {
+  overflow-anchor: none;
+}
+
 img,
 picture,
 video,

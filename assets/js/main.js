@@ -1,3 +1,31 @@
+if ("scrollRestoration" in window.history) {
+  window.history.scrollRestoration = "manual";
+}
+
+const navigationEntry = window.performance?.getEntriesByType?.("navigation")?.[0];
+const isReload = navigationEntry?.type === "reload";
+const isBackForward = navigationEntry?.type === "back_forward";
+const shouldResetReloadScroll = isReload && window.location.hash === "";
+
+if (isBackForward && "scrollRestoration" in window.history) {
+  window.history.scrollRestoration = "auto";
+}
+
+function resetReloadScroll() {
+  if (!shouldResetReloadScroll) return;
+
+  window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+    });
+  });
+}
+
+if (shouldResetReloadScroll) {
+  window.scrollTo(0, 0);
+  window.addEventListener("pageshow", resetReloadScroll);
+}
+
 const sectionsRoot = document.querySelector("#sections-root");
 
 const sectionPaths = [
@@ -45,6 +73,7 @@ async function loadSections() {
   }
 
   sectionsRoot.innerHTML = availableSections.join("\n");
+  resetReloadScroll();
 
   [
     initHeader,
@@ -203,6 +232,17 @@ function initHeader() {
 
   if (!header) return;
 
+  header.classList.remove("is-menu-open");
+  document.body.classList.remove("menu-open");
+  document.body.style.top = "";
+  lockedScrollY = 0;
+
+  if (menuToggle && mobileNav) {
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Открыть меню");
+    mobileNav.setAttribute("aria-hidden", "true");
+  }
+
   function setScrolledState() {
     header.classList.toggle("is-scrolled", window.scrollY > 48);
   }
@@ -270,14 +310,7 @@ function initHeader() {
     const hash = window.location.hash;
     if (!hash) return;
 
-    const navigationEntry = window.performance?.getEntriesByType?.("navigation")?.[0];
-
-    if (navigationEntry?.type === "reload") {
-      clearLocationHash();
-      return;
-    }
-
-    if (navigationEntry?.type === "back_forward") return;
+    if (isBackForward) return;
 
     const target = targetFromHash(hash);
     if (!target) {
@@ -287,7 +320,6 @@ function initHeader() {
 
     requestAnimationFrame(() => {
       scrollToTarget(target, false);
-      clearLocationHash();
     });
   }
 
