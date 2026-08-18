@@ -228,7 +228,7 @@
   object-position: 50% 42%;
 }
 
-.episode-flow__route li:nth-child(2) .episode-flow__media video {
+.episode-flow__route li:nth-child(2) .episode-flow__media img {
   object-position: 50% 50%;
 }
 

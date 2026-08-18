@@ -7,12 +7,8 @@ const sectionPaths = [
   "sections/episode-flow.html",
   "sections/latest-episode.html",
   "sections/episodes.html",
-  "sections/menu.html",
-  "sections/host.html",
-  "sections/guest.html",
   "sections/partners.html",
   "sections/collaboration.html",
-  "sections/final-cta.html",
   "sections/footer.html",
   "sections/radio-player.html",
 ];
