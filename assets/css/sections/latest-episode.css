@@ -308,7 +308,7 @@ button.latest-episode__preview {
 .video-modal {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 2000;
   box-sizing: border-box;
   display: grid;
   place-items: center;

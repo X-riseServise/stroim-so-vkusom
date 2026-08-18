@@ -27,6 +27,7 @@ if (shouldResetReloadScroll) {
 }
 
 const sectionsRoot = document.querySelector("#sections-root");
+const assetVersion = "20260818";
 
 const sectionPaths = [
   "sections/header.html",
@@ -42,7 +43,7 @@ const sectionPaths = [
 ];
 
 async function loadSection(path) {
-  const response = await fetch(path);
+  const response = await fetch(`${path}?v=${assetVersion}`);
 
   if (!response.ok) {
     throw new Error(`Section load failed ${path}: ${response.status}`);
