@@ -39,7 +39,6 @@ const sectionPaths = [
   "sections/partners.html",
   "sections/collaboration.html",
   "sections/footer.html",
-  "sections/radio-player.html",
 ];
 
 async function loadSection(path) {
@@ -78,13 +77,14 @@ async function loadSections() {
 
   [
     initHeader,
+    window.initHeaderRadio,
     initVideoStills,
     initEpisodeFlow,
     initVideoTriggers,
     initPartnersReveal,
     initFooterReveal,
     initPlaceholderLinks,
-  ].forEach((initializer) => {
+  ].filter(Boolean).forEach((initializer) => {
     try {
       initializer();
     } catch (error) {

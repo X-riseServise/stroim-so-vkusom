@@ -43,15 +43,6 @@
   animation: about-rise 620ms ease both;
 }
 
-.about__label {
-  margin: 0 0 16px;
-  color: #b3312c;
-  font-size: 13px;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .about__title {
   margin: 0;
   color: #1f201d;
@@ -162,7 +153,6 @@
 }
 
 .about__media-caption,
-.about__media-number,
 .about__media-line {
   position: absolute;
   z-index: 3;
@@ -182,15 +172,6 @@
   letter-spacing: 0.08em;
   line-height: 1.2;
   text-transform: uppercase;
-}
-
-.about__media-number {
-  top: 24px;
-  right: 24px;
-  color: #c7352f;
-  font-size: 34px;
-  font-weight: 950;
-  line-height: 1;
 }
 
 .about__media-line {
@@ -279,11 +260,6 @@
   .about__intro {
     display: contents;
     animation: none;
-  }
-
-  .about__label {
-    order: 1;
-    margin: 0;
   }
 
   .about__title {

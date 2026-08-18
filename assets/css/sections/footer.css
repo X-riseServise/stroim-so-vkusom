@@ -9,21 +9,10 @@
     #eee7db;
 }
 
-.footer::before,
 .footer::after {
   position: absolute;
   content: "";
   pointer-events: none;
-}
-
-.footer::before {
-  right: clamp(-40px, -3vw, -12px);
-  bottom: clamp(20px, 4vw, 52px);
-  color: rgba(32, 33, 31, 0.045);
-  content: "06";
-  font-size: clamp(150px, 20vw, 300px);
-  font-weight: 950;
-  line-height: 0.8;
 }
 
 .footer::after {
@@ -55,15 +44,6 @@
 .footer__statement,
 .footer__aside {
   min-width: 0;
-}
-
-.footer__label {
-  margin: 0 0 16px;
-  color: #d24840;
-  font-size: 13px;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .footer__title {
@@ -252,9 +232,6 @@
     margin-top: 42px;
   }
 
-  .footer::before {
-    display: none;
-  }
 }
 
 @media (max-width: 560px) {

@@ -8,17 +8,6 @@
     #eee7db;
 }
 
-.partners::before {
-  position: absolute;
-  top: 0;
-  left: clamp(28px, 7vw, 96px);
-  width: 2px;
-  height: 100%;
-  content: "";
-  background: linear-gradient(180deg, transparent, rgba(199, 53, 47, 0.78) 18%, rgba(199, 53, 47, 0.18) 72%, transparent);
-  pointer-events: none;
-}
-
 .partners__container {
   position: relative;
   z-index: 1;
@@ -37,15 +26,6 @@
 
 .partners__head {
   max-width: 720px;
-}
-
-.partners__label {
-  margin: 0 0 14px;
-  color: #b3312c;
-  font-size: 13px;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .partners__title {
@@ -102,44 +82,31 @@
   color: rgba(32, 33, 31, 0.36);
   font-size: clamp(22px, 2.2vw, 34px);
   font-weight: 950;
-  letter-spacing: 0;
   line-height: 0.94;
 }
 
 .partners__grid {
-  position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(20px, 2vw, 26px);
 }
 
-.partners__grid::before {
-  position: absolute;
-  top: 50%;
-  left: -22px;
-  width: calc(100% + 44px);
-  height: 1px;
-  content: "";
-  background: linear-gradient(90deg, transparent, rgba(199, 53, 47, 0.5), rgba(32, 33, 31, 0.12), transparent);
-  pointer-events: none;
-}
-
 .partners__item {
-  --partner-logo-size: 124px;
-  --partner-logo-scale: 1.05;
-  --partner-logo-hover-scale: 1.07;
-  --partner-logo-x: 0;
-  --partner-logo-y: 0;
-  --partner-watermark-size: 190px;
-  --partner-watermark-x: 58%;
-  --partner-watermark-y: 42%;
+  --partner-logo-size: 210px;
+  --partner-logo-scale: 1;
 
   position: relative;
   display: grid;
-  grid-template-rows: auto auto 100px minmax(0, 1fr) auto;
-  align-content: stretch;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 42%);
+  grid-template-areas:
+    "role logo"
+    "description logo"
+    "link logo";
+  grid-template-rows: auto 1fr auto;
+  gap: 14px 24px;
   min-width: 0;
-  height: 320px;
+  min-height: 286px;
+  padding: 26px;
   overflow: hidden;
   color: inherit;
   background: rgba(255, 253, 250, 0.66);
@@ -170,60 +137,9 @@
   height: 2px;
   background: #c7352f;
   transform-origin: right center;
-  transition: width 300ms ease, transform 300ms ease, background 300ms ease;
+  transition: width 300ms ease, transform 300ms ease;
 }
 
-.partners__item--slet {
-  --partner-logo-size: 132px;
-  --partner-logo-scale: 1.12;
-  --partner-logo-hover-scale: 1.14;
-  --partner-logo-x: -7%;
-  --partner-watermark-size: 210px;
-  --partner-watermark-x: 70%;
-  --partner-watermark-y: 48%;
-
-  padding: 26px;
-}
-
-.partners__item--radio {
-  --partner-logo-size: 140px;
-  --partner-logo-scale: 1.12;
-  --partner-logo-hover-scale: 1.14;
-  --partner-logo-x: 24%;
-  --partner-logo-y: -2%;
-  --partner-watermark-size: 205px;
-  --partner-watermark-x: 22%;
-  --partner-watermark-y: 46%;
-
-  padding: 26px;
-}
-
-.partners__item--concert {
-  --partner-logo-size: 118px;
-  --partner-logo-scale: 0.98;
-  --partner-logo-hover-scale: 1;
-  --partner-logo-x: -14%;
-  --partner-logo-y: 8%;
-  --partner-watermark-size: 190px;
-  --partner-watermark-x: 72%;
-  --partner-watermark-y: 48%;
-
-  padding: 26px;
-}
-
-.partners__item--premia {
-  --partner-logo-size: 128px;
-  --partner-logo-scale: 1.15;
-  --partner-logo-hover-scale: 1.17;
-  --partner-logo-x: 20%;
-  --partner-watermark-size: 195px;
-  --partner-watermark-x: 76%;
-  --partner-watermark-y: 40%;
-
-  padding: 26px;
-}
-
-.partners__number,
 .partners__role,
 .partners__logo-stage,
 .partners__descriptor,
@@ -232,32 +148,9 @@
   z-index: 1;
 }
 
-.partners__watermark {
-  position: absolute;
-  top: var(--partner-watermark-y);
-  left: var(--partner-watermark-x);
-  z-index: 0;
-  width: var(--partner-watermark-size);
-  height: var(--partner-watermark-size);
-  opacity: 0.035;
-  object-fit: contain;
-  pointer-events: none;
-  transform: translate(-50%, -50%) scale(1.12);
-  transition: opacity 300ms ease, transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.partners__number {
-  color: #b3312c;
-  font-size: 13px;
-  font-weight: 950;
-  letter-spacing: 0.1em;
-  line-height: 1;
-  transition: color 280ms ease, transform 280ms ease;
-}
-
 .partners__role {
+  grid-area: role;
   width: fit-content;
-  margin-top: 10px;
   padding-top: 7px;
   color: rgba(32, 33, 31, 0.46);
   border-top: 1px solid rgba(32, 33, 31, 0.16);
@@ -269,52 +162,64 @@
 
 .partners__logo-stage {
   display: flex;
-  width: 100%;
-  height: 100px;
+  grid-area: logo;
+  min-width: 0;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
-  transform: translate(var(--partner-logo-x), var(--partner-logo-y));
 }
 
 .partners__logo-stage img {
   display: block;
-  width: var(--partner-logo-size);
-  height: var(--partner-logo-size);
-  flex: 0 0 auto;
+  width: min(100%, var(--partner-logo-size));
+  height: min(100%, var(--partner-logo-size));
+  max-height: 222px;
   object-fit: contain;
-  object-position: center;
   transform: scale(var(--partner-logo-scale));
   transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.partners__item--slet {
+  --partner-logo-size: 218px;
+  --partner-logo-scale: 1.08;
+}
+
+.partners__item--radio {
+  --partner-logo-size: 224px;
+  --partner-logo-scale: 1.08;
+}
+
+.partners__item--concert {
+  --partner-logo-size: 210px;
+  --partner-logo-scale: 1.08;
+}
+
+.partners__item--premia {
+  --partner-logo-size: 220px;
+  --partner-logo-scale: 1.08;
+}
+
 .partners__descriptor {
-  max-width: 470px;
-  margin-top: 8px;
-  color: rgba(32, 33, 31, 0.68);
+  grid-area: description;
+  align-self: center;
+  margin: 0;
+  color: rgba(32, 33, 31, 0.72);
   font-size: clamp(15px, 1.15vw, 18px);
   font-weight: 680;
-  line-height: 1.34;
-  display: -webkit-box;
+  line-height: 1.38;
   overflow-wrap: break-word;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
 }
 
 .partners__link {
   display: inline-flex;
+  grid-area: link;
   align-items: center;
   gap: 10px;
   width: fit-content;
-  align-self: end;
-  margin-top: 12px;
   padding-top: 10px;
   color: #c7352f;
   border-top: 1px solid rgba(199, 53, 47, 0.32);
   font-size: 15px;
   font-weight: 900;
-  text-decoration: none;
 }
 
 .partners__link span:last-child {
@@ -365,24 +270,13 @@
     transform: translateX(-4px);
   }
 
-  .partners__item:hover .partners__number {
-    color: #d83a34;
-    transform: translateY(-2px);
-  }
-
   .partners__item:hover .partners__logo-stage img {
-    transform: scale(var(--partner-logo-hover-scale));
-  }
-
-  .partners__item:hover .partners__watermark {
-    opacity: 0.05;
-    transform: translate(-53%, -47%) scale(1.15);
+    transform: scale(calc(var(--partner-logo-scale) + 0.03));
   }
 
   .partners__item:hover .partners__link span:last-child {
     transform: translateX(6px);
   }
-
 }
 
 @media (max-width: 1024px) {
@@ -395,43 +289,26 @@
     text-align: left;
   }
 
-  .partners__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .partners__item {
+    grid-template-columns: minmax(0, 1fr) minmax(160px, 40%);
+    gap: 12px 18px;
+    min-height: 270px;
+    padding: 24px;
   }
 }
 
 @media (max-width: 768px) {
-  .partners::before {
-    left: 18px;
-  }
-
   .partners__container {
     width: min(calc(100% - 32px), 1280px);
     padding-block: 74px 84px;
-  }
-
-  .partners__top {
-    margin-bottom: 28px;
-  }
-
-  .partners__network strong {
-    max-width: 100%;
   }
 
   .partners__grid {
     grid-template-columns: 1fr;
   }
 
-  .partners__item,
-  .partners__item--slet,
-  .partners__item--radio,
-  .partners__item--concert,
-  .partners__item--premia {
-    padding: 24px;
-  }
-
   .partners__item {
-    --partner-watermark-size: 180px;
+    min-height: 280px;
   }
 
   .partners__footer {
@@ -463,34 +340,22 @@
     font-size: clamp(18px, 5vw, 22px);
   }
 
-  .partners__item,
-  .partners__item--slet,
-  .partners__item--radio,
-  .partners__item--concert,
-  .partners__item--premia {
+  .partners__item {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "logo"
+      "role"
+      "description"
+      "link";
+    grid-template-rows: 150px auto auto auto;
+    gap: 14px;
+    min-height: 0;
     padding: 20px;
   }
 
-  .partners__item {
-    --partner-logo-size: 116px;
-    --partner-watermark-size: 160px;
-    --partner-logo-x: 0;
-    --partner-logo-y: 0;
-
-    grid-template-rows: auto auto 90px minmax(0, 1fr) auto;
-    height: 280px;
-  }
-
-  .partners__item--slet,
-  .partners__item--radio,
-  .partners__item--concert,
-  .partners__item--premia {
-    --partner-logo-scale: 1.05;
-    --partner-logo-hover-scale: 1.07;
-  }
-
-  .partners__logo-stage {
-    height: 90px;
+  .partners__logo-stage img {
+    width: min(100%, 190px);
+    height: 150px;
   }
 
   .partners__descriptor,
@@ -508,14 +373,9 @@
     transition-duration: 0.01ms;
   }
 
-  @media (hover: hover) and (pointer: fine) {
-    .partners__item:hover,
-    .partners__item:hover::after,
-    .partners__item:hover .partners__number,
-    .partners__item:hover .partners__logo-stage img,
-    .partners__item:hover .partners__watermark,
-    .partners__item:hover .partners__link span:last-child {
-      transform: none;
-    }
+  .partners__item,
+  .partners__logo-stage img,
+  .partners__link span:last-child {
+    transition-duration: 0.01ms;
   }
 }

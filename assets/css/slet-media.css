@@ -1,0 +1,79 @@
+.slet-placeholder {
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: #20211f;
+  background:
+    linear-gradient(90deg, rgba(32, 33, 31, 0.022) 1px, transparent 1px) 0 0 / 92px 92px,
+    linear-gradient(0deg, rgba(32, 33, 31, 0.018) 1px, transparent 1px) 0 0 / 92px 92px,
+    #faf9f6;
+}
+
+.slet-placeholder__main {
+  display: flex;
+  width: min(calc(100% - 48px), 760px);
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin-inline: auto;
+  padding-block: 56px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.slet-placeholder__logo {
+  display: block;
+  width: clamp(150px, 24vw, 230px);
+  height: clamp(150px, 24vw, 230px);
+  object-fit: contain;
+}
+
+.slet-placeholder__eyebrow {
+  margin: 18px 0 0;
+  color: #d24840;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.slet-placeholder h1 {
+  max-width: 680px;
+  margin: 18px 0 0;
+  font-size: clamp(42px, 7vw, 82px);
+  font-weight: 950;
+  letter-spacing: -0.035em;
+  line-height: 0.96;
+  text-wrap: balance;
+}
+
+.slet-placeholder p:not(.slet-placeholder__eyebrow) {
+  margin: 24px 0 0;
+  color: rgba(32, 33, 31, 0.66);
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.5;
+}
+
+.slet-placeholder a {
+  display: inline-flex;
+  min-height: 48px;
+  margin-top: 34px;
+  padding-inline: 22px;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+  background: #c7352f;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.slet-placeholder a:hover,
+.slet-placeholder a:focus-visible {
+  background: #a92a26;
+}
+
+.slet-placeholder a:focus-visible {
+  outline: 2px solid #20211f;
+  outline-offset: 4px;
+}

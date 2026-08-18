@@ -11,6 +11,19 @@
       <a class="site-nav__link" href="#collaboration">Связаться с нами</a>
     </nav>
 
+    <div class="header-radio" data-radio-player hidden aria-label="Прямой эфир Радио на Стройке">
+      <audio data-radio-audio preload="none"></audio>
+      <span class="header-radio__live-dot" aria-hidden="true"></span>
+      <span class="header-radio__label">
+        <span class="header-radio__label-full">Радио на стройке</span>
+        <span class="header-radio__label-short" aria-hidden="true">Радио</span>
+      </span>
+      <button class="header-radio__play" type="button" data-radio-play aria-label="Включить радио" aria-pressed="false">
+        <span class="header-radio__play-icon" aria-hidden="true"></span>
+      </button>
+      <span class="visually-hidden" data-radio-status aria-live="polite">Радио выключено</span>
+    </div>
+
     <a class="site-header__cta" href="#latest-episode">
       <span>Смотреть выпуск</span>
       <span aria-hidden="true">→</span>

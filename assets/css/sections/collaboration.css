@@ -47,15 +47,6 @@
   min-width: 0;
 }
 
-.collaboration__label {
-  margin: 0 0 12px;
-  color: #d24840;
-  font-size: 13px;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .collaboration__title {
   max-width: 600px;
   margin: 0;
