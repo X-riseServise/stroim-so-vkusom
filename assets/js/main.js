@@ -26,26 +26,42 @@ async function loadSection(path) {
 async function loadSections() {
   if (!sectionsRoot) return;
 
-  try {
-    const htmlParts = [];
+  const htmlParts = await Promise.all(
+    sectionPaths.map(async (path) => {
+      try {
+        return await loadSection(path);
+      } catch (error) {
+        console.error(error);
+        return "";
+      }
+    })
+  );
 
-    for (const path of sectionPaths) {
-      htmlParts.push(await loadSection(path));
-    }
+  const availableSections = htmlParts.filter(Boolean);
 
-    sectionsRoot.innerHTML = htmlParts.join("\n");
-    initHeader();
-    initVideoStills();
-    initEpisodeFlow();
-    initVideoTriggers();
-    initPartnersReveal();
-    initFooterReveal();
-    initPlaceholderLinks();
-    scrollToInitialHash();
-  } catch (error) {
-    console.error(error);
+  if (!availableSections.length) {
     sectionsRoot.innerHTML = '<p role="alert">Секции страницы временно недоступны.</p>';
+    return;
   }
+
+  sectionsRoot.innerHTML = availableSections.join("\n");
+
+  [
+    initHeader,
+    initVideoStills,
+    initEpisodeFlow,
+    initVideoTriggers,
+    initPartnersReveal,
+    initFooterReveal,
+    initPlaceholderLinks,
+    scrollToInitialHash,
+  ].forEach((initializer) => {
+    try {
+      initializer();
+    } catch (error) {
+      console.error(error);
+    }
+  });
 }
 
 function scrollToInitialHash() {
