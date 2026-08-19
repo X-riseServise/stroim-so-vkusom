@@ -27,12 +27,13 @@ if (shouldResetReloadScroll) {
 }
 
 const sectionsRoot = document.querySelector("#sections-root");
-const assetVersion = "20260818";
+const assetVersion = "20260819";
 
 const sectionPaths = [
   "sections/header.html",
   "sections/hero.html",
   "sections/about.html",
+  "sections/strengths.html",
   "sections/episode-flow.html",
   "sections/latest-episode.html",
   "sections/episodes.html",
