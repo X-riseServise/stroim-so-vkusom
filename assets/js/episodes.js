@@ -61,7 +61,7 @@
   function setImage(image, src, alt) {
     if (!image) return;
 
-    image.src = src || "assets/images/latest-episode-preview.jpg";
+    image.src = src || "assets/images/episode-01-cover-v2.png";
     image.alt = alt || "Обложка выпуска";
   }
 
