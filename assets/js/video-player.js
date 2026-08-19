@@ -2,6 +2,39 @@
   let modal = null;
   let previousFocus = null;
 
+  function buildRutubeEmbedUrl(rawUrl) {
+    if (!rawUrl) return null;
+
+    let url;
+
+    try {
+      url = new URL(rawUrl);
+    } catch (error) {
+      return null;
+    }
+
+    const host = url.hostname.toLowerCase().replace(/^www\./, "");
+
+    if (host !== "rutube.ru") {
+      return null;
+    }
+
+    const match = url.pathname.match(/^\/(?:play\/embed|video(?:\/private)?)\/([a-f\d]{32})\/?$/i);
+
+    if (!match) {
+      return null;
+    }
+
+    const embed = new URL(`https://rutube.ru/play/embed/${match[1].toLowerCase()}/`);
+    const privateAccessKey = url.searchParams.get("p");
+
+    if (privateAccessKey && /^[a-zA-Z0-9_-]+$/.test(privateAccessKey)) {
+      embed.searchParams.set("p", privateAccessKey);
+    }
+
+    return embed.toString();
+  }
+
   function buildVkEmbedUrl(rawUrl) {
     if (!rawUrl) return null;
 
@@ -145,7 +178,7 @@
   }
 
   function openVideoModal(rawUrl, trigger) {
-    const embedUrl = buildVkEmbedUrl(rawUrl);
+    const embedUrl = buildRutubeEmbedUrl(rawUrl) || buildVkEmbedUrl(rawUrl);
 
     if (!embedUrl) {
       showUnavailableMessage(trigger);
@@ -159,9 +192,10 @@
 
     iframe.src = embedUrl;
     iframe.title = "Видео выпуска";
-    iframe.allow = "autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock";
+    iframe.allow = "clipboard-write; autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock";
     iframe.allowFullscreen = true;
     iframe.frameBorder = "0";
+    iframe.referrerPolicy = "origin-when-cross-origin";
 
     frameWrap.replaceChildren(iframe);
     previousFocus = trigger || document.activeElement;
@@ -185,6 +219,7 @@
   }
 
   window.StroimVideoPlayer = {
+    buildRutubeEmbedUrl,
     buildVkEmbedUrl,
     openVideoModal,
     closeVideoModal,
