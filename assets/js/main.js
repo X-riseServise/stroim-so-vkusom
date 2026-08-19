@@ -27,7 +27,7 @@ if (shouldResetReloadScroll) {
 }
 
 const sectionsRoot = document.querySelector("#sections-root");
-const assetVersion = "20260822";
+const assetVersion = "20260823";
 
 const sectionPaths = [
   "sections/header.html",
