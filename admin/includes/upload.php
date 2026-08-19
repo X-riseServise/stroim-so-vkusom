@@ -29,7 +29,12 @@ function deleteUploadedFile(?string $relativePath): void
     $uploadsRoot = realpath(uploadBasePath());
     $filePath = realpath($fullPath);
 
-    if ($uploadsRoot && $filePath && str_starts_with($filePath, $uploadsRoot) && is_file($filePath)) {
+    if (
+        $uploadsRoot
+        && $filePath
+        && str_starts_with($filePath, $uploadsRoot . DIRECTORY_SEPARATOR)
+        && is_file($filePath)
+    ) {
         unlink($filePath);
     }
 }

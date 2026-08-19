@@ -14,6 +14,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      - name: Validate application
+        shell: bash
+        run: |
+          set -euo pipefail
+          find admin api tools -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          node --check assets/js/main.js
+          node --check assets/js/video-player.js
+          node --check assets/js/radio-player.js
+          node --check assets/js/episodes.js
+          test -f assets/video/hero-intro.mp4
+          test -f uploads/.htaccess
+
       - name: Setup SSH
         shell: bash
         run: |

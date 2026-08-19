@@ -47,7 +47,7 @@ function formDateValue(?string $value): string
     return $timestamp ? date('Y-m-d', $timestamp) : '';
 }
 
-function extractVkVideoUrl(string $value): string
+function extractVideoUrl(string $value): string
 {
     $value = trim($value);
 
@@ -62,9 +62,9 @@ function extractVkVideoUrl(string $value): string
     return $value;
 }
 
-function normalizeVkVideoUrl(string $value): ?string
+function normalizeVideoUrl(string $value): ?string
 {
-    $value = extractVkVideoUrl($value);
+    $value = extractVideoUrl($value);
 
     if ($value === '') {
         return null;
@@ -95,6 +95,22 @@ function normalizeVkVideoUrl(string $value): ?string
     }
 
     $host = preg_replace('/^www\./', '', $host);
+
+    if ($host === 'rutube.ru') {
+        if (!preg_match('#^/(?:play/embed|video(?:/private)?)/([a-f\d]{32})/?$#i', $path, $matches)) {
+            return null;
+        }
+
+        parse_str((string) ($parts['query'] ?? ''), $query);
+        $embedUrl = 'https://rutube.ru/play/embed/' . strtolower($matches[1]) . '/';
+        $accessKey = (string) ($query['p'] ?? '');
+
+        if ($accessKey !== '' && preg_match('/^[a-zA-Z0-9_-]+$/', $accessKey)) {
+            $embedUrl .= '?p=' . rawurlencode($accessKey);
+        }
+
+        return $embedUrl;
+    }
 
     if ($host !== 'vk.com' && $host !== 'vkvideo.ru') {
         return null;
@@ -140,7 +156,7 @@ function validateEpisodeInput(array $input): array
         'guest_name' => trim((string) ($input['guest_name'] ?? '')),
         'guest_position' => trim((string) ($input['guest_position'] ?? '')),
         'description' => trim((string) ($input['description'] ?? '')),
-        'vk_video_url' => extractVkVideoUrl((string) ($input['vk_video_url'] ?? '')),
+        'vk_video_url' => extractVideoUrl((string) ($input['video_url'] ?? $input['vk_video_url'] ?? '')),
         'published_at' => trim((string) ($input['published_at'] ?? '')),
         'status' => (string) ($input['status'] ?? 'draft'),
         'cover_image' => null,
@@ -171,12 +187,12 @@ function validateEpisodeInput(array $input): array
     }
 
     if ($data['vk_video_url'] !== '') {
-        $normalizedVkUrl = normalizeVkVideoUrl($data['vk_video_url']);
+        $normalizedVideoUrl = normalizeVideoUrl($data['vk_video_url']);
 
-        if ($normalizedVkUrl === null) {
-            $errors['vk_video_url'] = 'Укажите ссылку на VK Видео в формате video_ext.php или ссылку vk.com/video...';
+        if ($normalizedVideoUrl === null) {
+            $errors['vk_video_url'] = 'Укажите корректную ссылку RUTUBE или VK Видео.';
         } else {
-            $data['vk_video_url'] = $normalizedVkUrl;
+            $data['vk_video_url'] = $normalizedVideoUrl;
         }
     }
 

@@ -68,7 +68,10 @@ $csrfToken = generateCsrfToken();
   <body class="admin-page">
     <header class="admin-topbar">
       <a class="admin-brand" href="/admin/dashboard.php">Строим со вкусом — Администрирование</a>
-      <a class="admin-logout" href="/admin/logout.php">Выйти</a>
+      <form method="post" action="/admin/logout.php">
+        <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+        <button class="admin-logout" type="submit">Выйти</button>
+      </form>
     </header>
 
     <main class="admin-shell" aria-labelledby="episode-create-title">
@@ -118,9 +121,9 @@ $csrfToken = generateCsrfToken();
           </label>
 
           <label class="admin-field">
-            <span>Ссылка на VK Видео</span>
-            <input type="text" name="vk_video_url" value="<?= e((string) $values['vk_video_url']) ?>" placeholder="https://vkvideo.ru/video_ext.php?oid=-127401043&id=456254970&hd=4" inputmode="url">
-            <em>Можно вставить ссылку VK Video embed; если вставить iframe, сохранится только src.</em>
+            <span>Ссылка на видео</span>
+            <input type="text" name="video_url" value="<?= e((string) $values['vk_video_url']) ?>" placeholder="https://rutube.ru/play/embed/..." inputmode="url">
+            <em>Поддерживаются RUTUBE и VK Video; из iframe сохранится только src.</em>
             <?php if (!empty($errors['vk_video_url'])): ?><small><?= e($errors['vk_video_url']) ?></small><?php endif; ?>
           </label>
 

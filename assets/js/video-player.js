@@ -92,6 +92,10 @@
     return embed.toString();
   }
 
+  function buildVideoEmbedUrl(rawUrl) {
+    return buildRutubeEmbedUrl(rawUrl) || buildVkEmbedUrl(rawUrl);
+  }
+
   function getFocusableElements(container) {
     return Array.from(
       container.querySelectorAll(
@@ -178,7 +182,7 @@
   }
 
   function openVideoModal(rawUrl, trigger) {
-    const embedUrl = buildRutubeEmbedUrl(rawUrl) || buildVkEmbedUrl(rawUrl);
+    const embedUrl = buildVideoEmbedUrl(rawUrl);
 
     if (!embedUrl) {
       showUnavailableMessage(trigger);
@@ -221,6 +225,7 @@
   window.StroimVideoPlayer = {
     buildRutubeEmbedUrl,
     buildVkEmbedUrl,
+    buildVideoEmbedUrl,
     openVideoModal,
     closeVideoModal,
   };

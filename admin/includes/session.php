@@ -10,6 +10,11 @@ function adminIsHttps(): bool
 
 function startAdminSession(): void
 {
+    if (!headers_sent()) {
+        header('Cache-Control: no-store, private');
+        header('X-Robots-Tag: noindex, nofollow');
+    }
+
     if (session_status() === PHP_SESSION_ACTIVE) {
         return;
     }

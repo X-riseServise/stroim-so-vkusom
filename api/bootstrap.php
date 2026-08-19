@@ -76,7 +76,7 @@ function apiEpisodePayload(array $episode, array $recipes = [], bool $includeRec
             'position' => $episode['guest_position'] !== null ? (string) $episode['guest_position'] : null,
         ],
         'description' => (string) $episode['description'],
-        'vk_video_url' => $episode['vk_video_url'] !== null ? (string) $episode['vk_video_url'] : null,
+        'video_url' => $episode['vk_video_url'] !== null ? (string) $episode['vk_video_url'] : null,
         'cover_image' => apiPublicPath($episode['cover_image'] ?? null),
         'published_at' => $episode['published_at'] !== null ? (string) $episode['published_at'] : null,
     ];

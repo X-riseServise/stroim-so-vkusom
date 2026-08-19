@@ -219,7 +219,11 @@ h1 {
 }
 
 .admin-logout {
+  padding: 0;
   color: var(--admin-red);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
 }
 
 .admin-shell {

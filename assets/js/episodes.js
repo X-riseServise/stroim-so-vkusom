@@ -67,7 +67,8 @@
 
   function bindVideoTriggers(root, episode) {
     const triggers = root.querySelectorAll("[data-video-trigger]");
-    const embedUrl = window.StroimVideoPlayer?.buildVkEmbedUrl(episode.vk_video_url);
+    const videoUrl = episode.video_url || episode.vk_video_url;
+    const embedUrl = window.StroimVideoPlayer?.buildVideoEmbedUrl(videoUrl);
 
     triggers.forEach((trigger) => {
       trigger.disabled = !embedUrl;
@@ -77,7 +78,7 @@
       );
 
       trigger.addEventListener("click", () => {
-        window.StroimVideoPlayer?.openVideoModal(episode.vk_video_url, trigger);
+        window.StroimVideoPlayer?.openVideoModal(videoUrl, trigger);
       });
     });
   }

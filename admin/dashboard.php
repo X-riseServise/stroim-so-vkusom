@@ -31,7 +31,10 @@ try {
   <body class="admin-page">
     <header class="admin-topbar">
       <a class="admin-brand" href="/admin/dashboard.php">Строим со вкусом — Администрирование</a>
-      <a class="admin-logout" href="/admin/logout.php">Выйти</a>
+      <form method="post" action="/admin/logout.php">
+        <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+        <button class="admin-logout" type="submit">Выйти</button>
+      </form>
     </header>
 
     <main class="admin-shell" aria-labelledby="dashboard-title">
