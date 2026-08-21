@@ -2,10 +2,7 @@
   position: relative;
   overflow: hidden;
   color: #20211f;
-  background:
-    linear-gradient(90deg, rgba(32, 33, 31, 0.045) 1px, transparent 1px) 0 0 / 92px 92px,
-    linear-gradient(0deg, rgba(32, 33, 31, 0.032) 1px, transparent 1px) 0 0 / 92px 92px,
-    #eee7db;
+  background: #eee7db;
 }
 
 .partners__container {

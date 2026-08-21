@@ -4,8 +4,6 @@
   color: #f3eadc;
   background:
     radial-gradient(circle at 88% 12%, rgba(199, 53, 47, 0.13), transparent 28%),
-    linear-gradient(90deg, rgba(243, 234, 220, 0.04) 1px, transparent 1px) 0 0 / 96px 96px,
-    linear-gradient(0deg, rgba(243, 234, 220, 0.03) 1px, transparent 1px) 0 0 / 96px 96px,
     #171917;
 }
 

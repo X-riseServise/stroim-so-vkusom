@@ -2,10 +2,7 @@
   min-height: 100vh;
   min-height: 100dvh;
   color: #20211f;
-  background:
-    linear-gradient(90deg, rgba(32, 33, 31, 0.022) 1px, transparent 1px) 0 0 / 92px 92px,
-    linear-gradient(0deg, rgba(32, 33, 31, 0.018) 1px, transparent 1px) 0 0 / 92px 92px,
-    #faf9f6;
+  background: #faf9f6;
 }
 
 .slet-placeholder__main {
